@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { MenuModule } from './menu/menu.module';
+import { BasketModule } from './basket/basket.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MenuModule } from './menu/menu.module';
     }),
     UserModule,
     MenuModule,
+    BasketModule,
   ],
   controllers: [AppController],
   providers: [AppService],
