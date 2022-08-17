@@ -7,6 +7,10 @@ import { ValidationError } from "../utils/validation-error";
 
 @Injectable()
 export class UserService {
+  filterRegisterResponse(newUser: User): RegisterUserResponse {
+    const {id, email} = newUser;
+    return {id, email};
+  }
 
   async register(newUser: RegisterDto): Promise<RegisterUserResponse> {
     const users = await this.getAllUsers();
@@ -21,7 +25,7 @@ export class UserService {
     user.pwdHash = hashPwd(newUser.pwd);
     await user.save();
 
-    return Promise.resolve(undefined);
+    return this.filterRegisterResponse(user);
   }
 
   async getAllUsers(): Promise<User[]> {
