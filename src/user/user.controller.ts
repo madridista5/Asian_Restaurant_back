@@ -1,5 +1,7 @@
-import { Controller, Inject } from "@nestjs/common";
+import { Controller, Inject, Post } from "@nestjs/common";
 import { UserService } from "./user.service";
+import { RegisterDto } from "./dto/register.dto";
+import { RegisterUserResponse } from "../types";
 
 @Controller('user')
 export class UserController {
@@ -7,4 +9,8 @@ export class UserController {
     @Inject(UserService) private userService: UserService,
   ) {}
 
+  @Post('/register')
+  register(newUser: RegisterDto): Promise<RegisterUserResponse> {
+    return this.userService.register(newUser);
+  }
 }
