@@ -41,7 +41,7 @@ export class AuthService {
         }
       });
       if (!user) {
-        return res.json({ error: 'Invalid login data!' });
+        return res.json({ error: 'Nieprawidłowy email lub hasło!' });
       }
       const token = this.createToken(await this.generateToken(user));
 
