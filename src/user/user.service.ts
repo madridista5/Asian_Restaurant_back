@@ -13,6 +13,10 @@ export class UserService {
   }
 
   async register(newUser: RegisterDto): Promise<RegisterUserResponse> {
+    if(newUser.pwd.length < 8) {
+      throw new ValidationError('Hasło musi zawierać conajmniej 8 znaków.');
+    }
+
     const users = await this.getAllUsers();
     const checkEmail = users.some(user => user.email === newUser.email);
     if(checkEmail) {
