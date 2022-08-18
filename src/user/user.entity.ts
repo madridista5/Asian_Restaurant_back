@@ -15,7 +15,7 @@ export class User extends BaseEntity {
   pwdHash: string;
 
   @Column({
-    length: 1,
+    length: 5,
   })
   role: string;
 

@@ -4,6 +4,6 @@ export interface RegisterUserResponse {
 }
 
 export enum UserRole {
-  ADMIN = 'A',
-  USER = 'U',
+  ADMIN = 'ADIMN',
+  USER = 'USER',
 }
