@@ -57,4 +57,22 @@ export class AuthService {
     }
   }
 
+  async logout(user: User, res: Response) {
+    try {
+      user.currentTokenId = null;
+      await user.save();
+      res.clearCookie(
+        "jwt",
+        {
+          secure: false, // w wersji produkcyjnej (https) ustawiamy true
+          domain: process.env.DOMAIN,
+          httpOnly: true,
+        }
+      );
+      return res.json({ ok: true });
+    } catch (e) {
+      return res.json({ error: e.message });
+    }
+  }
+
 }
