@@ -17,8 +17,8 @@ export class DishInMenu extends BaseEntity implements AddMenuDto {
 
   @Column({
     type: 'decimal',
-    precision: 5,
-    scale: 2,
+    precision: 3,
+    scale: 0,
   })
   price: number;
 }

@@ -27,4 +27,9 @@ export class MenuController {
   getSeafood(): Promise<DishResponse[]> {
     return this.menuService.getSeafood();
   }
+
+  @Get('/allDishes')
+  getAllDishes(): Promise<DishResponse[]> {
+    return this.menuService.getAllDishes();
+  }
 }

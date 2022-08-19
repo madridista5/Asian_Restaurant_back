@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { DishInMenu } from "./dish-in-menu.entity";
 import { DishResponse } from "../types";
@@ -7,7 +7,7 @@ import { DishResponse } from "../types";
 export class MenuService {
 
   async add(newDish: AddMenuDto): Promise<void> {
-    const {category, name, price, description} = newDish;
+    const { category, name, price, description } = newDish;
     const dishToAdd = new DishInMenu();
     dishToAdd.category = category;
     dishToAdd.name = name;
@@ -17,9 +17,10 @@ export class MenuService {
   }
 
   async getPastaAndRice(): Promise<DishResponse[]> {
-    const res = await DishInMenu.find({where: {category: 'Makarony i ryż z WOK'}});
+    const res = await DishInMenu.find({ where: { category: "Makarony i ryż z WOK" } });
 
     return (res.map(obj => ({
+      category: obj.category,
       name: obj.name,
       description: obj.description,
       price: obj.price,
@@ -27,12 +28,23 @@ export class MenuService {
   }
 
   async getSeafood(): Promise<DishResponse[]> {
-    const res = await DishInMenu.find({where: {category: 'Owoce morza'}});
+    const res = await DishInMenu.find({ where: { category: "Owoce morza" } });
 
     return (res.map(obj => ({
+      category: obj.category,
       name: obj.name,
       description: obj.description,
       price: obj.price,
+    })) as DishResponse[]);
+  }
+
+  async getAllDishes(): Promise<DishResponse[]> {
+    const res = await DishInMenu.find();
+    return (res.map(obj => ({
+      category: obj.category,
+      name: obj.name,
+      description: obj.description,
+      price: obj.price
     })) as DishResponse[]);
   }
 }
