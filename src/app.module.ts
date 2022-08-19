@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { MenuModule } from './menu/menu.module';
 import { BasketModule } from './basket/basket.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { BasketModule } from './basket/basket.module';
     UserModule,
     MenuModule,
     BasketModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
