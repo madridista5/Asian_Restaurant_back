@@ -3,7 +3,7 @@ import { MenuService } from "./menu.service";
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { AdminGuard } from "../guards/admin.guard";
 import { AuthGuard } from "@nestjs/passport";
-import { PastaAndRiceResponse } from "../types";
+import { DishResponse } from "../types";
 
 @Controller('/menu')
 export class MenuController {
@@ -19,7 +19,12 @@ export class MenuController {
   }
 
   @Get('/pastaAndRice')
-  getPastaAndRice(): Promise<PastaAndRiceResponse[]> {
+  getPastaAndRice(): Promise<DishResponse[]> {
     return this.menuService.getPastaAndRice();
+  }
+
+  @Get('/seafood')
+  getSeafood(): Promise<DishResponse[]> {
+    return this.menuService.getSeafood();
   }
 }

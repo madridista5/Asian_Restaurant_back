@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { DishInMenu } from "./dish-in-menu.entity";
-import { PastaAndRiceResponse } from "../types";
+import { DishResponse } from "../types";
 
 @Injectable()
 export class MenuService {
@@ -16,13 +16,23 @@ export class MenuService {
     await dishToAdd.save();
   }
 
-  async getPastaAndRice(): Promise<PastaAndRiceResponse[]> {
+  async getPastaAndRice(): Promise<DishResponse[]> {
     const res = await DishInMenu.find({where: {category: 'Makarony i ryż z WOK'}});
-    const data: PastaAndRiceResponse[] = res.map(obj => ({
+
+    return (res.map(obj => ({
       name: obj.name,
       description: obj.description,
       price: obj.price,
-    }));
-    return data;
+    })) as DishResponse[]);
+  }
+
+  async getSeafood(): Promise<DishResponse[]> {
+    const res = await DishInMenu.find({where: {category: 'Owoce morza'}});
+
+    return (res.map(obj => ({
+      name: obj.name,
+      description: obj.description,
+      price: obj.price,
+    })) as DishResponse[]);
   }
 }

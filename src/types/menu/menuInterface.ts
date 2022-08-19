@@ -1,4 +1,4 @@
-export interface PastaAndRiceResponse {
+export interface DishResponse {
   name: string,
   description: string;
   price: number;
