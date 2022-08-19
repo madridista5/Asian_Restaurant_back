@@ -1,8 +1,9 @@
-import { Body, Controller, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Post, UseGuards } from "@nestjs/common";
 import { MenuService } from "./menu.service";
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { AdminGuard } from "../guards/admin.guard";
 import { AuthGuard } from "@nestjs/passport";
+import { PastaAndRiceResponse } from "../types";
 
 @Controller('/menu')
 export class MenuController {
@@ -17,4 +18,8 @@ export class MenuController {
     return this.menuService.add(newDish);
   }
 
+  @Get('/pastaAndRice')
+  getPastaAndRice(): Promise<PastaAndRiceResponse[]> {
+    return this.menuService.getPastaAndRice();
+  }
 }
