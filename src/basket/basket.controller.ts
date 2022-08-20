@@ -35,4 +35,12 @@ export class BasketController {
   deleteDishFromBasket(@Param('id') id: string): Promise<void> {
     return this.basketService.deleteDishFromBasket(id);
   }
+
+  @Delete('/deleteAll')
+  @UseGuards(AuthGuard('jwt'))
+  deleteAllBasket(
+    @UserObj() user: User,
+  ): Promise<void> {
+    return this.basketService.deleteAllBasket(user);
+  }
 }

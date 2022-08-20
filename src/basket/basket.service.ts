@@ -1,11 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from "@nestjs/common";
 import { AddDishBasketDto } from './dto/add-dish-basket.dto';
 import { DishInBasket } from "./dish-in-basket.entity";
 import { User } from "../user/user.entity";
 import { DishInBasketResponse } from "../types";
+import { DataSource } from "typeorm";
 
 @Injectable()
 export class BasketService {
+
+  constructor(
+    @Inject(DataSource) private dataSource: DataSource,
+    ) {}
 
   async addDishToBasket(newDish: AddDishBasketDto, user: User): Promise<void> {
     const dish = new DishInBasket;
@@ -31,5 +36,14 @@ export class BasketService {
 
   async deleteDishFromBasket(id: string): Promise<void> {
     await DishInBasket.delete(id);
+  }
+
+  async deleteAllBasket(user: User): Promise<void> {
+    await this.dataSource
+      .createQueryBuilder()
+      .delete()
+      .from(DishInBasket)
+      .where('userId = :id', {id: user.id})
+      .execute();
   }
 }
