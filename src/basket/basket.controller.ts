@@ -43,4 +43,12 @@ export class BasketController {
   ): Promise<void> {
     return this.basketService.deleteAllBasket(user);
   }
+
+  @Get('/sumOfBasket')
+  @UseGuards(AuthGuard('jwt'))
+  getSumOfBasket(
+    @UserObj() user: User,
+  ): Promise<number> {
+    return this.basketService.getSumOfBasket(user);
+  }
 }

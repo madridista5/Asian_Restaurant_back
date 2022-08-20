@@ -46,4 +46,9 @@ export class BasketService {
       .where('userId = :id', {id: user.id})
       .execute();
   }
+
+  async getSumOfBasket(user: User): Promise<number> {
+    const userBasket = await this.getUserBasket(user);
+    return userBasket.reduce((prev, curr) => prev + Number(curr.price), 0);
+  }
 }
