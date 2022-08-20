@@ -1,6 +1,5 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "../user/user.entity";
-import { JoinColumn } from "typeorm/browser";
 
 @Entity()
 export class DishInBasket extends BaseEntity {
