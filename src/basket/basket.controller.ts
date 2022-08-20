@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, UseGuards } from "@nestjs/common";
 import { AddDishBasketDto } from "./dto/add-dish-basket.dto";
 import { BasketService } from "./basket.service";
 import { AuthGuard } from "@nestjs/passport";
@@ -28,5 +28,11 @@ export class BasketController {
     @UserObj() user: User,
   ): Promise<DishInBasketResponse[]> {
     return this.basketService.getUserBasket(user);
+  }
+
+  @Delete('/delete/:id')
+  @UseGuards(AuthGuard('jwt'))
+  deleteDishFromBasket(@Param('id') id: string): Promise<void> {
+    return this.basketService.deleteDishFromBasket(id);
   }
 }

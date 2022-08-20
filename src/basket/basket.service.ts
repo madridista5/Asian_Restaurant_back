@@ -23,8 +23,13 @@ export class BasketService {
 
     return currentUser.dishesInBasket
       .map(dish => ({
+        id: dish.id,
         name: dish.name,
         price: dish.price,
       })) as DishInBasketResponse[];
+  }
+
+  async deleteDishFromBasket(id: string): Promise<void> {
+    await DishInBasket.delete(id);
   }
 }

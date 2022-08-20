@@ -6,6 +6,7 @@ export interface DishResponse {
 }
 
 export interface DishInBasketResponse {
+  id: string;
   name: string;
   price: number;
 }
