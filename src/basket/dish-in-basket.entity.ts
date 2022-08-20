@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "../user/user.entity";
 
 @Entity()
 export class DishInBasket extends BaseEntity {
@@ -10,10 +11,12 @@ export class DishInBasket extends BaseEntity {
 
   @Column({
     type: 'decimal',
-    precision: 5,
-    scale: 2,
+    precision: 3,
+    scale: 0,
   })
   price: number;
 
-  // relation to user
+  @ManyToOne(type => User, entity => entity.dishesInBasket)
+  @JoinColumn()
+  user: User;
 }
