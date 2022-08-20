@@ -5,7 +5,6 @@ import { AuthLoginDto } from "./dto/auth-login.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { UserObj } from "../decorators/userobj.decorator";
 import { User } from "../user/user.entity";
-import { AdminGuard } from "../guards/admin.guard";
 
 @Controller('auth')
 export class AuthController {
