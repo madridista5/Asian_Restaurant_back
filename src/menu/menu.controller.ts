@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, UseGuards } from "@nestjs/common";
 import { MenuService } from "./menu.service";
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { AdminGuard } from "../guards/admin.guard";
@@ -32,4 +32,24 @@ export class MenuController {
   getAllDishes(): Promise<DishResponse[]> {
     return this.menuService.getAllDishes();
   }
+
+  @Get('/oneDish/:id')
+  getOneDish(@Param('id') id: string): Promise<DishResponse[]> {
+    return this.menuService.getOneDish(id);
+  }
+
+  @Post('/editOneDish')
+  @UseGuards(AdminGuard)
+  @UseGuards(AuthGuard("jwt"))
+  editOneDish(@Body() req: AddMenuDto): Promise<void> {
+    return this.menuService.editOneDish(req);
+  }
+
+  @Delete('/delete/:id')
+  @UseGuards(AdminGuard)
+  @UseGuards(AuthGuard("jwt"))
+  deleteOneDishFromMenu(@Param('id') id: string): Promise<void> {
+    return this.menuService.deleteOneDishFromMenu(id);
+  }
+
 }
