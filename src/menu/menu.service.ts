@@ -41,10 +41,15 @@ export class MenuService {
   async getAllDishes(): Promise<DishResponse[]> {
     const res = await DishInMenu.find();
     return (res.map(obj => ({
+      id: obj.id,
       category: obj.category,
       name: obj.name,
       description: obj.description,
       price: obj.price
     })) as DishResponse[]);
+  }
+
+  async getOneDish(id: string): Promise<DishResponse[]> {
+    return await DishInMenu.find({where: {id}});
   }
 }

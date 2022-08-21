@@ -1,4 +1,5 @@
 export interface DishResponse {
+  id: string,
   category: string;
   name: string,
   description: string;

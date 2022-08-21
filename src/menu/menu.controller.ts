@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Post, UseGuards } from "@nestjs/common";
 import { MenuService } from "./menu.service";
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { AdminGuard } from "../guards/admin.guard";
@@ -31,5 +31,10 @@ export class MenuController {
   @Get('/allDishes')
   getAllDishes(): Promise<DishResponse[]> {
     return this.menuService.getAllDishes();
+  }
+
+  @Get('/oneDish/:id')
+  getOneDish(@Param('id') id: string): Promise<DishResponse[]> {
+    return this.menuService.getOneDish(id);
   }
 }
