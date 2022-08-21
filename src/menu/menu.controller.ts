@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Inject, Param, Post, UseGuards } from "@nestjs/common";
 import { MenuService } from "./menu.service";
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { AdminGuard } from "../guards/admin.guard";
@@ -44,4 +44,12 @@ export class MenuController {
   editOneDish(@Body() req: AddMenuDto): Promise<void> {
     return this.menuService.editOneDish(req);
   }
+
+  @Delete('/delete/:id')
+  @UseGuards(AdminGuard)
+  @UseGuards(AuthGuard("jwt"))
+  deleteOneDishFromMenu(@Param('id') id: string): Promise<void> {
+    return this.menuService.deleteOneDishFromMenu(id);
+  }
+
 }

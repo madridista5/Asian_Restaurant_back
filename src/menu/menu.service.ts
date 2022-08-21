@@ -71,4 +71,8 @@ export class MenuService {
       .where({id: req.id})
       .execute();
   }
+
+  async deleteOneDishFromMenu(id: string): Promise<void> {
+    await DishInMenu.delete(id);
+  }
 }
