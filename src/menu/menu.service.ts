@@ -1,10 +1,15 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { AddMenuDto } from "./dto/add-menu.dto";
 import { DishInMenu } from "./dish-in-menu.entity";
 import { DishResponse } from "../types";
+import { DataSource } from "typeorm";
 
 @Injectable()
 export class MenuService {
+  constructor(
+    @Inject(DataSource) private dataSource: DataSource,
+  ) {
+  }
 
   async add(newDish: AddMenuDto): Promise<void> {
     const { category, name, price, description } = newDish;
@@ -51,5 +56,19 @@ export class MenuService {
 
   async getOneDish(id: string): Promise<DishResponse[]> {
     return await DishInMenu.find({where: {id}});
+  }
+
+  async editOneDish(req: AddMenuDto): Promise<void> {
+    const dishToEdit = await DishInMenu.find({where: {id: req.id}});
+    dishToEdit[0].name = req.name;
+    dishToEdit[0].description = req.description;
+    dishToEdit[0].price = req.price;
+
+    await this.dataSource
+      .createQueryBuilder()
+      .update(DishInMenu)
+      .set(dishToEdit[0])
+      .where({id: req.id})
+      .execute();
   }
 }

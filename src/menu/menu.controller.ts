@@ -37,4 +37,11 @@ export class MenuController {
   getOneDish(@Param('id') id: string): Promise<DishResponse[]> {
     return this.menuService.getOneDish(id);
   }
+
+  @Post('/editOneDish')
+  @UseGuards(AdminGuard)
+  @UseGuards(AuthGuard("jwt"))
+  editOneDish(@Body() req: AddMenuDto): Promise<void> {
+    return this.menuService.editOneDish(req);
+  }
 }
