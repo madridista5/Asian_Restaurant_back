@@ -1,3 +1,24 @@
+<h1>The application works at:</h1>
+<br>
+https://asianfood.tlossy.networkmanager.pl
+<br>
+<br>
+You can create your own account using your email adress, log in and test how it works 🙂
+<br>
+<br>
+If you don't want to create an account you can use this test USER account:
+<br>
+email: <b>user@gmail.com</b>
+<br>
+password: <b>user1234</b></p>
+<br>
+You can also use this test ADMIN account:
+<br>
+email: <b>admin@gmail.com</b>
+<br>
+password: <b>admin123</b>
+<br>
+
 <div align="center">
 
 <img src="https://github.com/madridista5/madridista5/blob/main/asian_food.gif" alt="logo" width="500" height="auto" />
