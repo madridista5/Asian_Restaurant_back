@@ -7,7 +7,7 @@ import { DataSource } from "typeorm";
 @Injectable()
 export class MenuService {
   constructor(
-    @Inject(DataSource) private dataSource: DataSource,
+    @Inject(DataSource) private dataSource: DataSource
   ) {
   }
 
@@ -28,7 +28,7 @@ export class MenuService {
       category: obj.category,
       name: obj.name,
       description: obj.description,
-      price: obj.price,
+      price: obj.price
     })) as DishResponse[]);
   }
 
@@ -39,7 +39,7 @@ export class MenuService {
       category: obj.category,
       name: obj.name,
       description: obj.description,
-      price: obj.price,
+      price: obj.price
     })) as DishResponse[]);
   }
 
@@ -55,11 +55,11 @@ export class MenuService {
   }
 
   async getOneDish(id: string): Promise<DishResponse[]> {
-    return await DishInMenu.find({where: {id}});
+    return await DishInMenu.find({ where: { id } });
   }
 
   async editOneDish(req: AddMenuDto): Promise<void> {
-    const dishToEdit = await DishInMenu.find({where: {id: req.id}});
+    const dishToEdit = await DishInMenu.find({ where: { id: req.id } });
     dishToEdit[0].name = req.name;
     dishToEdit[0].description = req.description;
     dishToEdit[0].price = req.price;
@@ -68,7 +68,7 @@ export class MenuService {
       .createQueryBuilder()
       .update(DishInMenu)
       .set(dishToEdit[0])
-      .where({id: req.id})
+      .where({ id: req.id })
       .execute();
   }
 

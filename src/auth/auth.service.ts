@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import {Response} from 'express';
+import { Injectable } from "@nestjs/common";
+import { Response } from "express";
 import { v4 as uuid } from "uuid";
 import { JwtPayload } from "./jwt.strategy";
 import { sign } from "jsonwebtoken";
@@ -37,19 +37,19 @@ export class AuthService {
       const user = await User.findOne({
         where: {
           email: req.email,
-          pwdHash: hashPwd(req.pwd),
+          pwdHash: hashPwd(req.pwd)
         }
       });
       if (!user) {
-        return res.json({ error: 'Nieprawidłowy email lub hasło!' });
+        return res.json({ error: "Nieprawidłowy email lub hasło!" });
       }
       const token = this.createToken(await this.generateToken(user));
 
       return res
-        .cookie('jwt', token.accessToken, {
+        .cookie("jwt", token.accessToken, {
           secure: false, // w wersji produkcyjnej (https) ustawiamy true
-          domain: process.env.DOMAIN, 
-          httpOnly: true,
+          domain: process.env.DOMAIN,
+          httpOnly: true
         })
         .json({ role: user.role });
     } catch (e) {
@@ -66,7 +66,7 @@ export class AuthService {
         {
           secure: false, // w wersji produkcyjnej (https) ustawiamy true
           domain: process.env.DOMAIN,
-          httpOnly: true,
+          httpOnly: true
         }
       );
       return res.json({ ok: true });

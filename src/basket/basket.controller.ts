@@ -6,48 +6,49 @@ import { UserObj } from "../decorators/userobj.decorator";
 import { User } from "../user/user.entity";
 import { DishInBasketResponse } from "../types";
 
-@Controller('/basket')
+@Controller("/basket")
 export class BasketController {
 
   constructor(
-    @Inject(BasketService) private basketService: BasketService,
-    ) {}
+    @Inject(BasketService) private basketService: BasketService
+  ) {
+  }
 
-  @Post('/add')
-  @UseGuards(AuthGuard('jwt'))
+  @Post("/add")
+  @UseGuards(AuthGuard("jwt"))
   addDishToBasket(
     @Body() newDish: AddDishBasketDto,
-    @UserObj() user: User,
-    ): Promise<void> {
+    @UserObj() user: User
+  ): Promise<void> {
     return this.basketService.addDishToBasket(newDish, user);
   }
 
-  @Get('/userBasket')
-  @UseGuards(AuthGuard('jwt'))
+  @Get("/userBasket")
+  @UseGuards(AuthGuard("jwt"))
   getUserBasket(
-    @UserObj() user: User,
+    @UserObj() user: User
   ): Promise<DishInBasketResponse[]> {
     return this.basketService.getUserBasket(user);
   }
 
-  @Delete('/delete/:id')
-  @UseGuards(AuthGuard('jwt'))
-  deleteDishFromBasket(@Param('id') id: string): Promise<void> {
+  @Delete("/delete/:id")
+  @UseGuards(AuthGuard("jwt"))
+  deleteDishFromBasket(@Param("id") id: string): Promise<void> {
     return this.basketService.deleteDishFromBasket(id);
   }
 
-  @Delete('/deleteAll')
-  @UseGuards(AuthGuard('jwt'))
+  @Delete("/deleteAll")
+  @UseGuards(AuthGuard("jwt"))
   deleteAllBasket(
-    @UserObj() user: User,
+    @UserObj() user: User
   ): Promise<void> {
     return this.basketService.deleteAllBasket(user);
   }
 
-  @Get('/sumOfBasket')
-  @UseGuards(AuthGuard('jwt'))
+  @Get("/sumOfBasket")
+  @UseGuards(AuthGuard("jwt"))
   getSumOfBasket(
-    @UserObj() user: User,
+    @UserObj() user: User
   ): Promise<number> {
     return this.basketService.getSumOfBasket(user);
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 import { RegisterDto } from "./dto/register.dto";
 import { RegisterUserResponse, UserRole } from "../types";
 import { User } from "./user.entity";
@@ -8,18 +8,18 @@ import { ValidationError } from "../utils/validation-error";
 @Injectable()
 export class UserService {
   filterRegisterResponse(newUser: User): RegisterUserResponse {
-    const {id, email} = newUser;
-    return {id, email};
+    const { id, email } = newUser;
+    return { id, email };
   }
 
   async register(newUser: RegisterDto): Promise<RegisterUserResponse> {
-    if(newUser.pwd.length < 8) {
-      throw new ValidationError('Hasło musi zawierać conajmniej 8 znaków.');
+    if (newUser.pwd.length < 8) {
+      throw new ValidationError("Hasło musi zawierać conajmniej 8 znaków.");
     }
 
     const users = await this.getAllUsers();
     const checkEmail = users.some(user => user.email === newUser.email);
-    if(checkEmail) {
+    if (checkEmail) {
       throw new ValidationError(`Użytkownik z adresem email: ${newUser.email} posiada już konto.`);
     }
 

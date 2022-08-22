@@ -9,7 +9,7 @@ export class User extends BaseEntity {
   id: string;
 
   @Column({
-    length: 255,
+    length: 255
   })
   email: string;
 
@@ -17,13 +17,13 @@ export class User extends BaseEntity {
   pwdHash: string;
 
   @Column({
-    length: 5,
+    length: 5
   })
   role: UserRole;
 
   @Column({
     nullable: true,
-    default: null,
+    default: null
   })
   currentTokenId: string | null;
 

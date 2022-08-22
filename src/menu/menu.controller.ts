@@ -5,50 +5,51 @@ import { AdminGuard } from "../guards/admin.guard";
 import { AuthGuard } from "@nestjs/passport";
 import { DishResponse } from "../types";
 
-@Controller('/menu')
+@Controller("/menu")
 export class MenuController {
   constructor(
-    @Inject(MenuService) private menuService: MenuService,
-  ) {}
+    @Inject(MenuService) private menuService: MenuService
+  ) {
+  }
 
-  @Post('/add')
+  @Post("/add")
   @UseGuards(AdminGuard)
   @UseGuards(AuthGuard("jwt"))
   add(@Body() newDish: AddMenuDto): Promise<void> {
     return this.menuService.add(newDish);
   }
 
-  @Get('/pastaAndRice')
+  @Get("/pastaAndRice")
   getPastaAndRice(): Promise<DishResponse[]> {
     return this.menuService.getPastaAndRice();
   }
 
-  @Get('/seafood')
+  @Get("/seafood")
   getSeafood(): Promise<DishResponse[]> {
     return this.menuService.getSeafood();
   }
 
-  @Get('/allDishes')
+  @Get("/allDishes")
   getAllDishes(): Promise<DishResponse[]> {
     return this.menuService.getAllDishes();
   }
 
-  @Get('/oneDish/:id')
-  getOneDish(@Param('id') id: string): Promise<DishResponse[]> {
+  @Get("/oneDish/:id")
+  getOneDish(@Param("id") id: string): Promise<DishResponse[]> {
     return this.menuService.getOneDish(id);
   }
 
-  @Post('/editOneDish')
+  @Post("/editOneDish")
   @UseGuards(AdminGuard)
   @UseGuards(AuthGuard("jwt"))
   editOneDish(@Body() req: AddMenuDto): Promise<void> {
     return this.menuService.editOneDish(req);
   }
 
-  @Delete('/delete/:id')
+  @Delete("/delete/:id")
   @UseGuards(AdminGuard)
   @UseGuards(AuthGuard("jwt"))
-  deleteOneDishFromMenu(@Param('id') id: string): Promise<void> {
+  deleteOneDishFromMenu(@Param("id") id: string): Promise<void> {
     return this.menuService.deleteOneDishFromMenu(id);
   }
 

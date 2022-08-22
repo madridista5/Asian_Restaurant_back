@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { AddDishBasketDto } from './dto/add-dish-basket.dto';
+import { AddDishBasketDto } from "./dto/add-dish-basket.dto";
 import { DishInBasket } from "./dish-in-basket.entity";
 import { User } from "../user/user.entity";
 import { DishInBasketResponse } from "../types";
@@ -9,8 +9,9 @@ import { DataSource } from "typeorm";
 export class BasketService {
 
   constructor(
-    @Inject(DataSource) private dataSource: DataSource,
-    ) {}
+    @Inject(DataSource) private dataSource: DataSource
+  ) {
+  }
 
   async addDishToBasket(newDish: AddDishBasketDto, user: User): Promise<void> {
     const dish = new DishInBasket;
@@ -22,7 +23,7 @@ export class BasketService {
 
   async getUserBasket(user: User): Promise<DishInBasketResponse[]> {
     const relation = await User.find({
-      relations: ["dishesInBasket"],
+      relations: ["dishesInBasket"]
     });
     const currentUser: User = relation.filter(currentUser => currentUser.id === user.id)[0];
 
@@ -30,7 +31,7 @@ export class BasketService {
       .map(dish => ({
         id: dish.id,
         name: dish.name,
-        price: dish.price,
+        price: dish.price
       })) as DishInBasketResponse[];
   }
 
@@ -43,7 +44,7 @@ export class BasketService {
       .createQueryBuilder()
       .delete()
       .from(DishInBasket)
-      .where('userId = :id', {id: user.id})
+      .where("userId = :id", { id: user.id })
       .execute();
   }
 

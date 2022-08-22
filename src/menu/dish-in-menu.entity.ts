@@ -3,7 +3,7 @@ import { AddMenuDto } from "./dto/add-menu.dto";
 
 @Entity()
 export class DishInMenu extends BaseEntity implements AddMenuDto {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -16,9 +16,9 @@ export class DishInMenu extends BaseEntity implements AddMenuDto {
   description: string;
 
   @Column({
-    type: 'decimal',
+    type: "decimal",
     precision: 3,
-    scale: 0,
+    scale: 0
   })
   price: number;
 }

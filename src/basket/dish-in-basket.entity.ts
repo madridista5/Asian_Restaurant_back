@@ -3,16 +3,16 @@ import { User } from "../user/user.entity";
 
 @Entity()
 export class DishInBasket extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   name: string;
 
   @Column({
-    type: 'decimal',
+    type: "decimal",
     precision: 3,
-    scale: 0,
+    scale: 0
   })
   price: number;
 
